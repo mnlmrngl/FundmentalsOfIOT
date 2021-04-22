@@ -1,3 +1,9 @@
+## Präsentation: Thermometer
+
+[Link zu Präsentaion, Code und Erklärung](https://mnlmrngl.github.io/FundmentalsOfIOT/Thermometer%20with%20termistor)
+
+## 
+
 GitHub Pages Link: [https://mnlmrngl.github.io/FundmentalsOfIOT/](https://mnlmrngl.github.io/FundmentalsOfIOT/)
 
 ## Task 1
