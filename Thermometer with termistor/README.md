@@ -1,5 +1,5 @@
 # Thermometer mit einem Thermistor
-[Link zur Präsentation](https://mnlmrngl.github.io/FundmentalsOfIOT/tree/main/Thermometer%20with%20termistor/Thermoelektrische%20Wandler_v04_final.pdf)
+[Link zur Präsentation](https://mnlmrngl.github.io/FundmentalsOfIOT/Thermometer%20with%20termistor/Thermoelektrische%20Wandler_v04_final.pdf)
 
 ## 1. Code in VS Code laden
 Damit ihr das Beispiel benutzen könnt, müsst ihr den Ordner "Code" al Projekt über PlatformIO öffen.  
