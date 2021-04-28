@@ -30,7 +30,7 @@ Schaltplan und Code, um Motor in zwei Richtungen zu derehen
 ![Schaltplan für Motor](assets/Motor.png)
 
 Formel zur Berechnung, wie lange der Motor sich drehen muss, damit er das Papier um X cm bewegt  
-![formula](https://render.githubusercontent.com/render/math?math=t%20=%20\frac{60%20\cdot%20s}{2%20\pi%20y%20\cdot%20x%20\cdot%20r})  
+![formula](https://render.githubusercontent.com/render/math?math=t%20=%20\frac{60%20\cdot%20s}{2%20\pi%20\cdot%20x%20\cdot%20r})  
 s = Strecke, die das Papier zurücklegen soll in m  
 x = Umdrehungen pro Minute des Motors  
 r = Raduis der Rolle inkl Paper in m
