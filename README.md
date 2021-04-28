@@ -33,5 +33,5 @@ Formel zur Berechnung, wie lange der Motor sich drehen muss, damit er das Papier
 ![formula](https://render.githubusercontent.com/render/math?math=t%20=%20\frac{60%20\cdot%20s}{2%20\pi%20\cdot%20x%20\cdot%20r})  
 s = Strecke, die das Papier zurücklegen soll in; [s] = m  
 x = Umdrehungen pro Minute des Motors  
-r = Raduis der Rolle inkl Paper in; [s] = m 
+r = Raduis der Rolle inkl Paper in; [s] = m  
 [t] = s
