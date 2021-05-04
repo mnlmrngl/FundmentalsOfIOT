@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <wifi_connection.h>
 
 // seconds > milliseconds > microseconds (*1000)
 #define MICROSECONDS_TO_SECONDS 1000000

@@ -47,7 +47,7 @@ void setup() {
 }
 
 void loop() {
-  delay(100);
+  delay(500);
   Serial.println(touchRead(touchInput));
   Serial.println(threshold);
   if(touchRead(touchInput) < threshold){

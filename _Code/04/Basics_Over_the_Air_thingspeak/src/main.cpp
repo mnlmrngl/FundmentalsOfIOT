@@ -57,8 +57,6 @@ int threshold = 30;
 WiFiClient client;
 int number = 0;
 
-// unsigned long myChannelNumber = 1353572;         // Deine ThingSpeak Kanal Nummer
-// const char * myWriteAPIKey = "5OSADRN49F5A5318"; // Dein ThingSpeak API Key
 
 unsigned long myChannelNumber = 1353572;         // Deine ThingSpeak Kanal Nummer
 const char * myWriteAPIKey = "5OSADRN49F5A5318"; // Dein ThingSpeak API Key
