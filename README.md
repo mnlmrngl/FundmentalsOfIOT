@@ -35,3 +35,8 @@ s = Strecke, die das Papier zurücklegen soll in; [s] = m
 x = Umdrehungen pro Minute des Motors  
 r = Raduis der Rolle inkl Paper in; [s] = m  
 [t] = s
+
+## Task 5
+Die Vorlagen für den Lasercutter können [hier](https://mnlmrngl.github.io/FundmentalsOfIOT/blob/main/_Lasercutter_Vorlage/ArduinoAvengers_Gehaeuse_LaserCutterVorlages.zip) gesammelt als ZIP-File heruntergeladen werden.
+
+Alternativ können die unter folgendem Link einzeln angeschaut werden: [https://github.com/mnlmrngl/FundmentalsOfIOT/tree/main/_Lasercutter_Vorlage](/_Lasercutter_Vorlage)
