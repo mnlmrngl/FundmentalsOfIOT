@@ -37,6 +37,7 @@ r = Raduis der Rolle inkl Paper in; [s] = m
 [t] = s
 
 ## Task 5
-Die Vorlagen für den Lasercutter können [hier](https://mnlmrngl.github.io/FundmentalsOfIOT/blob/main/_Lasercutter_Vorlage/ArduinoAvengers_Gehaeuse_LaserCutterVorlages.zip) gesammelt als ZIP-File heruntergeladen werden.
+Die Lasercuttervorlagen können unter folgendem Link einzeln angeschaut und heruntergeladen werden werden: [https://github.com/mnlmrngl/FundmentalsOfIOT/tree/main/_Lasercutter_Vorlage](/_Lasercutter_Vorlage)  
+**Jede Vorlage muss 2x gecuttet werden, sodass am Ende 2 Schilder zusammengesetzt werden können.**
 
-Alternativ können die unter folgendem Link einzeln angeschaut werden: [https://github.com/mnlmrngl/FundmentalsOfIOT/tree/main/_Lasercutter_Vorlage](/_Lasercutter_Vorlage)
+(Das Frontgesign)[https://github.com/mnlmrngl/FundmentalsOfIOT/tree/main/_Lasercutter_Vorlage/ArduinoAvangers_Frontdesign.png] muss 2 Mal gedruckt und nochmals gecuttet werden.
