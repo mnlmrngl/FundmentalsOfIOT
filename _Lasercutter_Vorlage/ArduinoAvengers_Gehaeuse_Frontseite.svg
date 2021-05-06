@@ -9,10 +9,10 @@
             <rect x="98.587" y="1076.9" width="455.85" height="227.279" style="fill:none;stroke:black;stroke-width:0.89px;stroke-linejoin:round;stroke-miterlimit:1.5;"/>
         </g>
         <g id="Bildschrim1" serif:id="Bildschrim" transform="matrix(0.0414558,0,0,1.24721,510.674,-1085.07)">
-            <rect x="98.587" y="1076.9" width="455.85" height="227.279" style="fill:none;stroke:black;stroke-width:1.04px;stroke-linejoin:round;stroke-miterlimit:1.5;"/>
+            <path d="M554.437,1076.9L98.587,1076.9L98.587,1304.18L554.437,1304.18L554.437,1076.9ZM435.796,1080.84C435.796,1108.46 435.796,1272.62 435.796,1300.24C435.796,1300.24 217.228,1300.24 217.228,1300.24C217.228,1300.24 217.228,1110.72 217.228,1080.84L435.796,1080.84Z"/>
         </g>
         <g id="Bildschrim2" serif:id="Bildschrim" transform="matrix(0.0414558,0,0,1.24721,131.351,-1085.07)">
-            <rect x="98.587" y="1076.9" width="455.85" height="227.279" style="fill:none;stroke:black;stroke-width:1.04px;stroke-linejoin:round;stroke-miterlimit:1.5;"/>
+            <path d="M554.437,1076.9L98.587,1076.9L98.587,1304.18L554.437,1304.18L554.437,1076.9ZM435.796,1080.84L435.796,1300.24C435.796,1300.24 217.228,1300.24 217.228,1300.24C217.228,1272.62 217.228,1108.46 217.228,1080.84L435.796,1080.84Z"/>
         </g>
     </g>
     <g transform="matrix(1,0,0,1,17.6662,0)">
