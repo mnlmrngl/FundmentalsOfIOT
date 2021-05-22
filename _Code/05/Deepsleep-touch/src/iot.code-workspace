@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"name": "Basics_Selfmadey_Makey",
+			"path": "..\\..\\..\\04\\Basics_Selfmadey_Makey"
+		},
+		{
+			"name": "Deepsleep-touch-thingspeak",
+			"path": "..\\..\\Deepsleep-touch-thingspeak"
+		},
+		{
+			"name": "Basics_Over_the_Air_thingspeak",
+			"path": "..\\..\\..\\04\\Basics_Over_the_Air_thingspeak"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Thermometer_v05",
+		"files.associations": {
+			"main_cpp": "cpp"
+		}
+	}
+}
