@@ -21,10 +21,10 @@ const char webappIndex[] PROGMEM = R"=====(
             xmlhttp.send();
         }
 
-        function test() {
+        function getQuestions()() {
             console.log("Testing");
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/testing", true);
+            xmlhttp.open("GET", "/getQuestions", true);
             xmlhttp.send();
         }
     </script>
@@ -53,7 +53,7 @@ const char webappIndex[] PROGMEM = R"=====(
         <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
     </form>
 
-    <button onclick="test()">Test</button>
+    <button onclick="getQuestions()">Fragen auslesen</button>
 
 
 </body>

@@ -1,5 +1,6 @@
 #include <WiFi.h>
 #include "webapp-index.h"
+#include <SPIFFS.h>
 
 const char *ssid = "ESP32-Access-Point";
 const char *password = NULL;
@@ -22,9 +23,8 @@ String getInput(int begin, int end)
   return input;
 }
 
-void setup()
+void setupWiFi()
 {
-  Serial.begin(115200);
   Serial.print("Setting AP (Access Point)…");
   WiFi.softAP(ssid, password);
 
@@ -35,31 +35,78 @@ void setup()
   server.begin();
 }
 
+void setupSPIFFS()
+{
+  if (!SPIFFS.begin(true))
+  {
+    Serial.println("An Error has occurred while mounting SPIFFS");
+    return;
+  }
+
+  File fileToAppend = SPIFFS.open("/test.txt", FILE_APPEND);
+
+  if (!fileToAppend)
+  {
+    Serial.println("There was an error opening the file for appending");
+    return;
+  }
+
+  if (fileToAppend.println("APPENDED LINE nach Stromentzug"))
+  {
+    Serial.println("File content was appended");
+  }
+  else
+  {
+    Serial.println("File append failed");
+  }
+
+  fileToAppend.close();
+
+
+
+
+  File fileToRead = SPIFFS.open("/test.txt");
+
+            if (!fileToRead)
+            {
+              Serial.println("Failed to open file for reading");
+              return;
+            }
+
+            Serial.println("File Content:");
+
+            while (fileToRead.available())
+            {
+
+              Serial.write(fileToRead.read());
+            }
+
+            fileToRead.close();
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  setupWiFi();
+  setupSPIFFS();
+}
+
 void loop()
 {
   WiFiClient client = server.available(); // Listen for incoming clients
 
   if (client)
-  {                                // If a new client connects,
+  {                                
     Serial.println("New Client."); // print a message out in the serial port
     // String currentLine = "";       // make a String to hold incoming data from the client
     while (client.connected())
     { // loop while the client's connected
       if (client.available())
       {
-
-        // if there's bytes to read from the client,
-        char c = client.read(); // read a byte, then
-                                //        // Serial.write(c);        // print it out the serial monitor
+        char c = client.read();
         header += c;
         if (c == '\n')
-        { // if the byte is a newline character
-          // if the current line is blank, you got two newline characters in a row.
-          // that's the end of the client HTTP request, so send a response:
-          // if (currentLine.length() == 0)
-          // {
-          // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
-          // and a content-type so the client knows what's coming, then a blank line:
+        {
           client.println("HTTP/1.1 200 OK");
           client.println("Content-type:text/html");
           client.println("Connection: close");
@@ -77,31 +124,32 @@ void loop()
 
             Serial.println(indexA - indexQ);
 
-            
-
             Serial.println("Frage: " + getInput(indexQ, indexA));
             Serial.println("Antwort A: " + getInput(indexQ, indexA));
             Serial.println("Antwort B: " + getInput(indexA, indexB));
             Serial.println("Antwort C: " + getInput(indexB, indexC));
             Serial.println("Antwort D: " + getInput(indexC, indexD));
+          }
+          else if (header.indexOf("GET /getQuestions") >= 0)
+          {
+            File fileToRead = SPIFFS.open("/test.txt");
 
-            // Serial.println("Q " + header.indexOf("__!q"));
-            // Serial.println("A " + indexA);
-            // Serial.println("b " + indexB);
-            // Serial.println("C " + indexC);
-            // Serial.println("D " + indexD);
-            // Serial.println("SAFE");
-            // Serial.println();
+            if (!fileToRead)
+            {
+              Serial.println("Failed to open file for reading");
+              return;
+            }
+            Serial.println("File Content:");
+            while (fileToRead.available())
+            {
+              Serial.write(fileToRead.read());
+            }
+            fileToRead.close();
           }
           else
             client.println(webappIndex);
           break;
-          // }
         }
-        // else if (c != '\r')
-        // {                   // if you got anything else but a carriage return character,
-        //   currentLine += c; // add it to the end of the currentLine
-        // }
       }
     }
 
@@ -110,4 +158,3 @@ void loop()
     client.stop();
   }
 }
-
