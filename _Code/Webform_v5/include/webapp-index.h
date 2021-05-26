@@ -8,26 +8,7 @@ const char webappIndex[] PROGMEM = R"=====(
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP WebApp</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script>
-        function validateForm() {
-            console.log('validate')
-
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/save__!q" + document.forms["form"]["question"].value +
-                "__!a" + document.forms["form"]["answerA"].value +
-                "__!b" + document.forms["form"]["answerB"].value +
-                "__!c" + document.forms["form"]["answerC"].value +
-                "__!d" + document.forms["form"]["answerD"].value, true);
-            xmlhttp.send();
-        }
-
-        function getQuestions()() {
-            console.log("Testing");
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/getQuestions", true);
-            xmlhttp.send();
-        }
-    </script>
+    
 </head>
 
 <body>
@@ -54,6 +35,27 @@ const char webappIndex[] PROGMEM = R"=====(
     </form>
 
     <button onclick="getQuestions()">Fragen auslesen</button>
+
+    <script>
+        function validateForm() {
+            console.log('validate')
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "/save__!q" + document.forms["form"]["question"].value +
+                "__!a" + document.forms["form"]["answerA"].value +
+                "__!b" + document.forms["form"]["answerB"].value +
+                "__!c" + document.forms["form"]["answerC"].value +
+                "__!d" + document.forms["form"]["answerD"].value, true);
+            xmlhttp.send();
+        }
+
+        function getQuestions() {
+            console.log("Testing");
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "/getQuestions", true);
+            xmlhttp.send();
+        }
+    </script>
 
 
 </body>
