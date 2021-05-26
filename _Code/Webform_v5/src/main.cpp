@@ -1,5 +1,3 @@
-
-// Load Wi-Fi library
 #include <WiFi.h>
 #include <webapp-index.h>
 
@@ -15,14 +13,6 @@ WiFiServer server(80);
 // Variable to store the HTTP request
 String header;
 
-// Auxiliar variables to store the current output state
-String output26State = "off";
-String output27State = "off";
-
-// Assign output variables to GPIO pins
-const int output26 = 26;
-const int output27 = 27;
-
 String getInput(int begin, int end)
 {
   String input;
@@ -37,12 +27,6 @@ String getInput(int begin, int end)
 void setup()
 {
   Serial.begin(115200);
-  // Initialize the output variables as outputs
-  pinMode(output26, OUTPUT);
-  pinMode(output27, OUTPUT);
-  // Set outputs to LOW
-  digitalWrite(output26, LOW);
-  digitalWrite(output27, LOW);
 
   // Connect to Wi-Fi network with SSID and password
   Serial.print("Setting AP (Access Point)…");
@@ -110,7 +94,6 @@ void loop()
     }
     // Clear the header variable
     header = "";
-    // Close the connection
     client.stop();
     Serial.println("Client disconnected.");
     Serial.println("");
