@@ -25,6 +25,23 @@ String getInput(int begin, int end)
   return input;
 }
 
+void listAllFiles()
+{
+
+  File root = SPIFFS.open("/");
+
+  File file = root.openNextFile();
+
+  while (file)
+  {
+
+    Serial.print("FILE: ");
+    Serial.println(file.name());
+
+    file = root.openNextFile();
+  }
+}
+
 void setupWiFi()
 {
   // Connect to Wi-Fi network with SSID and password
@@ -44,16 +61,15 @@ void setupSPIFFS()
   if (!SPIFFS.begin(true))
   {
     Serial.println("An Error has occurred while mounting SPIFFS");
-    return;
+    ESP.restart();
   }
 }
 
 void setup()
 {
   Serial.begin(115200);
-
-  setupWiFi();
   setupSPIFFS();
+  setupWiFi();
 }
 
 void loop()
@@ -81,19 +97,22 @@ void loop()
           // turns the GPIOs on and off
           if (header.indexOf("GET /save") >= 0)
           {
+            File questionFile = SPIFFS.open("/newQuestions.txt", FILE_APPEND);
+
             int indexQ = header.indexOf("__!q");
             int indexA = header.indexOf("__!a");
             int indexB = header.indexOf("__!b");
             int indexC = header.indexOf("__!c");
             int indexD = header.indexOf("__!d");
 
-            Serial.println(indexA - indexQ);
+            questionFile.println("F: " + getInput(indexQ, indexA));
+            questionFile.println("A: " + getInput(indexA, indexB));
+            questionFile.println("B: " + getInput(indexB, indexC));
+            questionFile.println("C: " + getInput(indexC, indexD));
+            questionFile.println("D: " + getInput(indexD, header.length() - 11));
+            questionFile.println();
 
-            Serial.println("Frage: " + getInput(indexQ, indexA));
-            Serial.println("Antwort A: " + getInput(indexA, indexB));
-            Serial.println("Antwort B: " + getInput(indexB, indexC));
-            Serial.println("Antwort C: " + getInput(indexC, indexD));
-            Serial.println("Antwort D: " + getInput(indexD, header.length() - 11));
+            questionFile.close();
           }
 
           // Display the HTML web page
