@@ -1,5 +1,6 @@
 #include <WiFi.h>
 #include <webapp-index.h>
+#include <SPIFFS.h>
 
 // Replace with your network credentials
 const char *ssid = "ESP32-Access-Point";
@@ -24,10 +25,8 @@ String getInput(int begin, int end)
   return input;
 }
 
-void setup()
+void setupWiFi()
 {
-  Serial.begin(115200);
-
   // Connect to Wi-Fi network with SSID and password
   Serial.print("Setting AP (Access Point)…");
   // Remove the password parameter, if you want the AP (Access Point) to be open
@@ -38,6 +37,23 @@ void setup()
   Serial.println(IP);
 
   server.begin();
+}
+
+void setupSPIFFS()
+{
+  if (!SPIFFS.begin(true))
+  {
+    Serial.println("An Error has occurred while mounting SPIFFS");
+    return;
+  }
+}
+
+void setup()
+{
+  Serial.begin(115200);
+
+  setupWiFi();
+  setupSPIFFS();
 }
 
 void loop()
@@ -62,8 +78,6 @@ void loop()
           client.println("Connection: close");
           client.println();
 
-          Serial.println("HEADER " + header);
-
           // turns the GPIOs on and off
           if (header.indexOf("GET /save") >= 0)
           {
@@ -79,7 +93,7 @@ void loop()
             Serial.println("Antwort A: " + getInput(indexA, indexB));
             Serial.println("Antwort B: " + getInput(indexB, indexC));
             Serial.println("Antwort C: " + getInput(indexC, indexD));
-            Serial.println("Antwort D: " + getInput(indexD, header.length()-11));
+            Serial.println("Antwort D: " + getInput(indexD, header.length() - 11));
           }
 
           // Display the HTML web page
