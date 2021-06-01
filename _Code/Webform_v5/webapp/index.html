@@ -20,10 +20,10 @@
             xmlhttp.send();
         }
 
-        function test() {
-            console.log("Testing");
+        function download() {
+            console.log("Download");
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/testing", true);
+            xmlhttp.open("GET", "/download", true);
             xmlhttp.send();
         }
     </script>
@@ -49,7 +49,7 @@
         <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
     </form>
 
-    <button onclick="test()">Test</button>
+    <button onclick="download()">Download</button>
 
 
 </body>

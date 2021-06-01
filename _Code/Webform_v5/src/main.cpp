@@ -1,7 +1,6 @@
 #include <WiFi.h>
 #include <webapp-index.h>
 #include <SPIFFS.h>
-#include <webapp-download.h>
 
 // Replace with your network credentials
 const char *ssid = "ESP32-Access-Point";
@@ -51,7 +50,6 @@ void setupSPIFFS()
   }
 }
 
-
 void setup()
 {
   Serial.begin(115200);
@@ -100,6 +98,24 @@ void loop()
             questionFile.println();
 
             questionFile.close();
+          }
+          else if (header.indexOf("GET /download") >= 0)
+          {
+            File questionFile = SPIFFS.open("/newQuestions.txt");
+
+
+            Serial.println("File Content:");
+
+            String downloadContent;
+
+            while (questionFile.available())
+            {
+              downloadContent += char(questionFile.read());
+              // Serial.write(questionFile.read());
+            }
+            questionFile.close();
+
+            Serial.println(downloadContent);
           }
           // Display the HTML web page
           client.println(htmlstring);

@@ -8,38 +8,12 @@ const char webappIndex[] PROGMEM = R"=====(
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP WebApp</title>
     <link rel="stylesheet" href="css/styles.css">
-    
-</head>
-
-<body>
-    <h1>Haturquiz</h1>
-
-
-    <form id="form" type="GET">
-        <label for="question">Frage</label>
-        <input value="Wie hoch ist der Baum?" type="text" name="question" id="question">
-        
-        <label for="answerA">Antwort A</label>
-        <input value="5m" type="text" name="answerA" id="answerA">
-
-        <label for="answerB">Antwort B</label>
-        <input value="12,5m" type="text" name="answerB" id="answerB">
-        
-        <label for="answerC">Antwort C</label>
-        <input value="drölf Zentimäöüter" type="text" name="answerC" id="answerC">
-        
-        <label for="answerD">Antwort D</label>
-        <input value="Scheiß egal" type="text" name="answerD" id="answerD">     
-
-        <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
-    </form>
-
     <script>
         function validateForm() {
             console.log('validate')
 
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/save__!q" + document.forms["form"]["question"].value +
+            xmlhttp.open("GET", "/__!q" + document.forms["form"]["question"].value +
                 "__!a" + document.forms["form"]["answerA"].value +
                 "__!b" + document.forms["form"]["answerB"].value +
                 "__!c" + document.forms["form"]["answerC"].value +
@@ -47,27 +21,36 @@ const char webappIndex[] PROGMEM = R"=====(
             xmlhttp.send();
         }
 
-        function downloadQuestions() {
-            console.log("Download Questions");
+        function download() {
+            console.log("Download");
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/downloadQuestions", true);
-            xmlhttp.send();
-        }
-
-        function listFiles() {
-            console.log("List Files");
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/listFiles", true);
-            xmlhttp.send();
-        }
-
-        function getQuestions() {
-            console.log("Show Questions");
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/showQuestions", true);
+            xmlhttp.open("GET", "/download", true);
             xmlhttp.send();
         }
     </script>
+</head>
+
+<body>
+    <h1>Haturquiz</h1>
+
+
+    <form id="form" type="GET">
+        <input type="text" name="question" id="question">
+        <label for="question">Frage</label>
+
+        <input type="text" name="answerA" id="answerA">
+        <label for="answerA">Antwort A</label>
+        <input type="text" name="answerB" id="answerB">
+        <label for="answerB">Antwort B</label>
+        <input type="text" name="answerC" id="answerC">
+        <label for="answerC">Antwort C</label>
+        <input type="text" name="answerD" id="answerD">
+        <label for="answerD">Antwort D</label>
+
+        <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
+    </form>
+
+    <button onclick="download()">Download</button>
 
 
 </body>
