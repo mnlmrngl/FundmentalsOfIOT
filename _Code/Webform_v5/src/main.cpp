@@ -12,6 +12,8 @@ String htmlstring = webappIndex;
 
 WiFiClient client;
 
+bool download = false;
+
 String downloadContent;
 
 // Set web server port number to 80
@@ -82,8 +84,9 @@ void loop()
           client.println("Content-type:text/html");
           client.println("Connection: close");
           client.println();
-
-          bool download = false;
+          htmlstring = webappStart;
+          client.println(htmlstring);
+          
           if (header.indexOf("GET /save") >= 0)
           {
             download = false;
@@ -116,19 +119,28 @@ void loop()
               downloadContent += char(questionFile.read());
             }
             questionFile.close();
+            // Serial.println("DDOWNLOAD");
+            // client.println("<div style='height:100px; width:100%; background:blue;' onload=\"createTextFile(" + downloadContent + ")\">Test innen</div>");
 
-            Serial.println(downloadContent);
+            // Serial.println(downloadContent);
           }
-          htmlstring = webappStart;
+          
           // client.println(htmlstring);
-          Serial.println("Download: " + download);
-          if (download)
+          // Serial.println(download);
+          if (download == 1)
           {
+            Serial.println("TEEESCCHHHDDDDD");
+            // client.println("<p> Test davor </p>");
             // client.print("<div style='height:100px; width:100%; background:red;' onload=\"createTextFile(");
-            client.print("<div onload=\"createTextFile(");
-            client.print(downloadContent);
-            client.println(")\"></div>");
-          }
+            // // client.print("<div onload=\"createTextFile(");
+            // client.print(downloadContent);
+            // client.println(")\">Test</div>");
+
+            // Serial.println(downloadContent);
+
+            client.println("<div style='height:100px; width:100%; background:blue;' onload=\"createTextFile(" + downloadContent + ")\">Test innen</div>");
+           }
+          client.println("<div style='height:100px; width:100%; background:red;' onload=\"createTextFile(" + downloadContent + ")\">" + downloadContent + "</div>");
 
           client.println("</body></html>");
           break;

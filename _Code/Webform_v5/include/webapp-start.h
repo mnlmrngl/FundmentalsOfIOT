@@ -61,6 +61,6 @@ const char webappStart[] = R"=====(
         <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
     </form>
 
-    <button onclick="download()">Download</button>
+    <button onclick="download(); window.location.reload();">Download</button>
 
 )=====";
