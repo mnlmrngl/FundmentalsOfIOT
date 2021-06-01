@@ -1,12 +1,15 @@
 #include <WiFi.h>
 #include <webapp-index.h>
 #include <SPIFFS.h>
+#include <webapp-download.h>
 
 // Replace with your network credentials
 const char *ssid = "ESP32-Access-Point";
 const char *password = NULL;
 
 String htmlstring = webappIndex;
+
+WiFiClient client;
 
 // Set web server port number to 80
 WiFiServer server(80);
@@ -23,23 +26,6 @@ String getInput(int begin, int end)
     input += header.charAt(i);
   }
   return input;
-}
-
-void listAllFiles()
-{
-
-  File root = SPIFFS.open("/");
-
-  File file = root.openNextFile();
-
-  while (file)
-  {
-
-    Serial.print("FILE: ");
-    Serial.println(file.name());
-
-    file = root.openNextFile();
-  }
 }
 
 void setupWiFi()
@@ -65,6 +51,7 @@ void setupSPIFFS()
   }
 }
 
+
 void setup()
 {
   Serial.begin(115200);
@@ -74,7 +61,7 @@ void setup()
 
 void loop()
 {
-  WiFiClient client = server.available(); // Listen for incoming clients
+  client = server.available(); // Listen for incoming clients
 
   if (client)
   {                                // If a new client connects,
@@ -114,7 +101,6 @@ void loop()
 
             questionFile.close();
           }
-
           // Display the HTML web page
           client.println(htmlstring);
           break;

@@ -1,4 +1,3 @@
-const char webappIndex[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +33,12 @@ const char webappIndex[] PROGMEM = R"=====(
         <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
     </form>
 
+
+    <button onclick="downloadQuestions()">Fragen downloaden</button>
+
+    <button onclick="listFiles()">DAteinen auflisten</button>
+    <button onclick="getQuestions()">Fragen Anzeigen</button>
+    
     <script>
         function validateForm() {
             console.log('validate')
@@ -73,4 +78,3 @@ const char webappIndex[] PROGMEM = R"=====(
 </body>
 
 </html>
-)=====";
