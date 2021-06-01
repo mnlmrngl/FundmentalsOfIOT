@@ -1,6 +1,8 @@
 #include <WiFi.h>
 #include <webapp-index.h>
 #include <SPIFFS.h>
+#include <webapp-download.h>
+#include "webapp-start.h"
 
 // Replace with your network credentials
 const char *ssid = "ESP32-Access-Point";
@@ -9,6 +11,8 @@ const char *password = NULL;
 String htmlstring = webappIndex;
 
 WiFiClient client;
+
+String downloadContent;
 
 // Set web server port number to 80
 WiFiServer server(80);
@@ -79,9 +83,10 @@ void loop()
           client.println("Connection: close");
           client.println();
 
-          // turns the GPIOs on and off
+          bool download = false;
           if (header.indexOf("GET /save") >= 0)
           {
+            download = false;
             File questionFile = SPIFFS.open("/newQuestions.txt", FILE_APPEND);
 
             int indexQ = header.indexOf("__!q");
@@ -101,24 +106,31 @@ void loop()
           }
           else if (header.indexOf("GET /download") >= 0)
           {
+            download = true;
             File questionFile = SPIFFS.open("/newQuestions.txt");
 
-
             Serial.println("File Content:");
-
-            String downloadContent;
 
             while (questionFile.available())
             {
               downloadContent += char(questionFile.read());
-              // Serial.write(questionFile.read());
             }
             questionFile.close();
 
             Serial.println(downloadContent);
           }
-          // Display the HTML web page
-          client.println(htmlstring);
+          htmlstring = webappStart;
+          // client.println(htmlstring);
+          Serial.println("Download: " + download);
+          if (download)
+          {
+            // client.print("<div style='height:100px; width:100%; background:red;' onload=\"createTextFile(");
+            client.print("<div onload=\"createTextFile(");
+            client.print(downloadContent);
+            client.println(")\"></div>");
+          }
+
+          client.println("</body></html>");
           break;
         }
         else
@@ -127,6 +139,7 @@ void loop()
         }
       }
     }
+
     // Clear the header variable
     header = "";
     client.stop();

@@ -26,22 +26,11 @@
             xmlhttp.open("GET", "/download", true);
             xmlhttp.send();
         }
-
-        function createTextFile(jsonString) {
-            console.log('TXT File');
-            var link = document.createElement('a');
-            link.download = 'data.json';
-            var blob = new Blob([jsonString], {
-                type: 'text/plain'
-            });
-            link.href = window.URL.createObjectURL(blob);
-            link.click();
-        }
     </script>
 </head>
 
 <body>
-    <h1>Haturquiz</h1>
+    <h1>Download</h1>
 
 
     <form id="form" type="GET">
@@ -62,7 +51,6 @@
 
     <button onclick="download()">Download</button>
 
-   
 
 </body>
 

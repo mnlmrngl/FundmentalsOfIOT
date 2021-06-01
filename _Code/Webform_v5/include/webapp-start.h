@@ -1,3 +1,4 @@
+const char webappStart[] = R"=====(
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,8 +63,4 @@
 
     <button onclick="download()">Download</button>
 
-   
-
-</body>
-
-</html>
+)=====";
