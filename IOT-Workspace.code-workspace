@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"name": "Captive Portal Example",
+			"path": "..\\IoT_WPM_Cooking_Recipes\\08_Communication\\Captive Portal Example"
+		},
+		{
+			"name": "Webform_v5",
+			"path": "_Code\\Webform_v5"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Webform_v5",
+		"files.associations": {
+			"functional": "cpp",
+			"fstream": "cpp",
+			"xlocmes": "cpp",
+			"*.tcc": "cpp",
+			"cstdlib": "cpp"
+		}
+	}
+}

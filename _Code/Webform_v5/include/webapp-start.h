@@ -1,5 +1,6 @@
 const char webappStart[] = R"=====(
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +14,7 @@ const char webappStart[] = R"=====(
             console.log('validate')
 
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", "/__!q" + document.forms["form"]["question"].value +
+            xmlhttp.open("GET", "/save/__!q" + document.forms["form"]["question"].value +
                 "__!a" + document.forms["form"]["answerA"].value +
                 "__!b" + document.forms["form"]["answerB"].value +
                 "__!c" + document.forms["form"]["answerC"].value +
@@ -38,6 +39,11 @@ const char webappStart[] = R"=====(
             link.href = window.URL.createObjectURL(blob);
             link.click();
         }
+
+        function downloadFile(content){
+            console.log(content);
+            
+        }
     </script>
 </head>
 
@@ -46,10 +52,10 @@ const char webappStart[] = R"=====(
 
 
     <form id="form" type="GET">
-        <input type="text" name="question" id="question">
+        <input type="text" name="question" id="question" value="Ich heiße Klaus">
         <label for="question">Frage</label>
 
-        <input type="text" name="answerA" id="answerA">
+        <input type="text" name="answerA" id="answerA" value="ä Ä ö Ö ü Ü">
         <label for="answerA">Antwort A</label>
         <input type="text" name="answerB" id="answerB">
         <label for="answerB">Antwort B</label>
@@ -61,6 +67,6 @@ const char webappStart[] = R"=====(
         <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
     </form>
 
-    <button onclick="download(); window.location.reload();">Download</button>
+    <button onclick="download(); window.location.reload();">Download link erstellen</button>
 
 )=====";

@@ -1,14 +1,13 @@
 #include <WiFi.h>
-#include <webapp-index.h>
 #include <SPIFFS.h>
-#include <webapp-download.h>
+// #include <webapp-download.h>
 #include "webapp-start.h"
 
 // Replace with your network credentials
 const char *ssid = "ESP32-Access-Point";
 const char *password = NULL;
 
-String htmlstring = webappIndex;
+String htmlstring = webappStart;
 
 WiFiClient client;
 
@@ -22,6 +21,71 @@ WiFiServer server(80);
 // Variable to store the HTTP request
 String header;
 
+String getFirst(String url, String toReplace)
+{
+  return url.substring(0, url.indexOf(toReplace));
+}
+
+String getLast(String url, String toReplace)
+{
+  return url.substring(url.indexOf(toReplace) + toReplace.length(), url.length());
+}
+
+String encodeOneChar(String url, String toReplace, String newStr)
+{
+  return getFirst(url, toReplace) + newStr + getLast(url, toReplace);
+}
+
+String encodeOneCharType(String str, String toReplace, String newStr)
+{
+  while (str.indexOf(toReplace) >= 0)
+  {
+    str = encodeOneChar(str, toReplace, newStr);
+  }
+  return str;
+}
+
+String encodeFullString(String str)
+{
+  str = encodeOneCharType(str, "%C3%9F", "ß");
+  str = encodeOneCharType(str, "%C3%A4", "Ä");
+  str = encodeOneCharType(str, "%C3%84", "ä");
+  str = encodeOneCharType(str, "%C3%B6", "Ö");
+  str = encodeOneCharType(str, "%C3%96", "ö");
+  str = encodeOneCharType(str, "%C3%BC", "Ü");
+  str = encodeOneCharType(str, "%C3%9C", "ü");
+  str = encodeOneCharType(str, "%20", " ");
+  str = encodeOneCharType(str, "%21", "!");
+  str = encodeOneCharType(str, "%22", "\"");
+  str = encodeOneCharType(str, "%23", "#");
+  str = encodeOneCharType(str, "%24", "$");
+  str = encodeOneCharType(str, "%25", "%");
+  str = encodeOneCharType(str, "%26", "&");
+  str = encodeOneCharType(str, "%27", "'");
+  str = encodeOneCharType(str, "%28", "(");
+  str = encodeOneCharType(str, "%29", ")");
+  str = encodeOneCharType(str, "%2A", "*");
+  str = encodeOneCharType(str, "%2B", "+");
+  str = encodeOneCharType(str, "%2C", ",");
+  str = encodeOneCharType(str, "%2D", "-");
+  str = encodeOneCharType(str, "%2E", ".");
+  str = encodeOneCharType(str, "%2F", "/");
+  str = encodeOneCharType(str, "%3A", ":");
+  str = encodeOneCharType(str, "%3B", ";");
+  str = encodeOneCharType(str, "%3C", "<");
+  str = encodeOneCharType(str, "%3D", "=");
+  str = encodeOneCharType(str, "%3E", ">");
+  str = encodeOneCharType(str, "%3F", "?");
+  str = encodeOneCharType(str, "%40", "@");
+  str = encodeOneCharType(str, "%5B", "[");
+  str = encodeOneCharType(str, "%5D", "]");
+  str = encodeOneCharType(str, "%7B", "{");
+  str = encodeOneCharType(str, "%7C", "|");
+  str = encodeOneCharType(str, "%7D", "}");
+
+  return str;
+}
+
 String getInput(int begin, int end)
 {
   String input;
@@ -30,6 +94,10 @@ String getInput(int begin, int end)
   {
     input += header.charAt(i);
   }
+
+  input = encodeFullString(input);
+
+  Serial.println(input);
   return input;
 }
 
@@ -86,7 +154,7 @@ void loop()
           client.println();
           htmlstring = webappStart;
           client.println(htmlstring);
-          
+
           if (header.indexOf("GET /save") >= 0)
           {
             download = false;
@@ -105,6 +173,9 @@ void loop()
             questionFile.println("D: " + getInput(indexD, header.length() - 11));
             questionFile.println();
 
+            Serial.println("F: " + getInput(indexQ, indexA));
+            Serial.println("A: " + getInput(indexA, indexB));
+
             questionFile.close();
           }
           else if (header.indexOf("GET /download") >= 0)
@@ -119,28 +190,14 @@ void loop()
               downloadContent += char(questionFile.read());
             }
             questionFile.close();
-            // Serial.println("DDOWNLOAD");
-            // client.println("<div style='height:100px; width:100%; background:blue;' onload=\"createTextFile(" + downloadContent + ")\">Test innen</div>");
-
-            // Serial.println(downloadContent);
           }
-          
-          // client.println(htmlstring);
-          // Serial.println(download);
-          if (download == 1)
-          {
-            Serial.println("TEEESCCHHHDDDDD");
-            // client.println("<p> Test davor </p>");
-            // client.print("<div style='height:100px; width:100%; background:red;' onload=\"createTextFile(");
-            // // client.print("<div onload=\"createTextFile(");
-            // client.print(downloadContent);
-            // client.println(")\">Test</div>");
+          // if (download == 1)
+          // {
+          //   Serial.println("TEEESCCHHHDDDDD");
 
-            // Serial.println(downloadContent);
-
-            client.println("<div style='height:100px; width:100%; background:blue;' onload=\"createTextFile(" + downloadContent + ")\">Test innen</div>");
-           }
-          client.println("<div style='height:100px; width:100%; background:red;' onload=\"createTextFile(" + downloadContent + ")\">" + downloadContent + "</div>");
+          //   client.println("<button onclick=\"downloadFile(decodeURI(" +  downloadContent + "))\"> Starte DOwnload </button>");
+          //   // client.println("<button onclick=\"downloadFile('asdsadsad')\"> Starte DOwnload </button>");
+          // }
 
           client.println("</body></html>");
           break;
