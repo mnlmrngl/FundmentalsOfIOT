@@ -166,18 +166,7 @@ void loop()
             int indexC = header.indexOf("__!c");
             int indexD = header.indexOf("__!d");
 
-            // questionFile.println("F: " + getInput(indexQ, indexA));
-            // questionFile.println("A: " + getInput(indexA, indexB));
-            // questionFile.println("B: " + getInput(indexB, indexC));
-            // questionFile.println("C: " + getInput(indexC, indexD));
-            // questionFile.println("D: " + getInput(indexD, header.length() - 11));
-            // questionFile.println("---------------------");
-
-            // questionFile.print("F: " + getInput(indexQ, indexA) + "\n A: " + getInput(indexA, indexB) + "\n B: " + getInput(indexB, indexC) + "\n C: " + getInput(indexC, indexD) + "\n D: " + getInput(indexD, header.length() - 11) + "\n \n");
-            questionFile.print("F: " + getInput(indexQ, indexA) + " A: " + getInput(indexA, indexB) + "  B: " + getInput(indexB, indexC) + " C: " + getInput(indexC, indexD) + " D: " + getInput(indexD, header.length() - 11));
-
-            Serial.println("F: " + getInput(indexQ, indexA));
-            Serial.println("A: " + getInput(indexA, indexB));
+            questionFile.print("__F: " + getInput(indexQ, indexA) + " __A: " + getInput(indexA, indexB) + "  __B: " + getInput(indexB, indexC) + " __C: " + getInput(indexC, indexD) + " __D: " + getInput(indexD, header.length() - 11));
 
             questionFile.close();
           }
@@ -193,13 +182,9 @@ void loop()
               downloadContent += char(questionFile.read());
             }
             questionFile.close();
-            // client.println("<button onclick=\"downloadFile(decodeURI(" +  downloadContent + "))\"> Starte DOwnload </button>");
           }
           else if (header.indexOf("GET /delete") >= 0)
           {
-            // File questionFile = SPIFFS.open("/newQuestions.txt", FILE_WRITE);
-            // questionFile.printz();
-            // questionFile.close();
 
             SPIFFS.remove("/newQuestions.txt");
           }
@@ -209,20 +194,18 @@ void loop()
             Serial.println(downloadContent);
 
             client.println("<button onclick=\"downloadFile('WanderschildFragen','" + downloadContent + "')\"> Starte DOwnload </button>");
-            // client.println("<button onclick=\"downloadFile('asdsadsad')\"> Starte DOwnload </button>");
           }
 
           client.println("</body></html>");
           break;
         }
         else
-        { // if you got a newline, then clear currentLine
+        {
           currentLine = "";
         }
       }
     }
 
-    // Clear the header variable
     header = "";
     client.stop();
     Serial.println("Client disconnected.");

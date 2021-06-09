@@ -45,8 +45,22 @@
             link.click();
         }
 
+        function formatContent(content) {
+            content = content.replace('__F:', '\n\nF:');
+            content = content.replace('__A:', '\nA:');
+            content = content.replace('__B:', '\nB:');
+            content = content.replace('__C:', '\nC:');
+            content = content.replace('__D:', '\nD:');
+            return content;
+        }
+
         function downloadFile(filename, content) {
             var element = document.createElement('a');
+            var end = content.match(/__F/g).length
+            for (let i = 0; i < end; i++) {
+                content = formatContent(content);
+            }        
+
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
             element.setAttribute('download', filename);
 
@@ -81,7 +95,8 @@
     </form>
 
     <button onclick="download(); window.location.reload();">Download link erstellen</button>
-    <button onclick="downloadFile('WanderschildFragen',' sadasdass \n dsfds')"> Starte DOwnload </button>
+    <button onclick="downloadFile('WanderschildFragen','__F: Ich heiße Klaus __A: Ä ä Ö ö Ü ü  __B:  __C:  __D: __F: Ich heiße Klaus __A: Ä ä Ö ö Ü ü  __B:  __C:  __D: ')">
+        Starte DOwnload </button>
 
     <button onclick="deleteSPIFFS()">NEue Fragen löschen</button>
 

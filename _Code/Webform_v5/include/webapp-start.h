@@ -45,9 +45,22 @@ const char webappStart[] = R"=====(
             link.href = window.URL.createObjectURL(blob);
             link.click();
         }
+function formatContent(content) {
+            content = content.replace('__F:', '\n\nF:');
+            content = content.replace('__A:', '\nA:');
+            content = content.replace('__B:', '\nB:');
+            content = content.replace('__C:', '\nC:');
+            content = content.replace('__D:', '\nD:');
+            return content;
+        }
 
         function downloadFile(filename, content) {
             var element = document.createElement('a');
+            var end = content.match(/__F/g).length
+            for (let i = 0; i < end; i++) {
+                content = formatContent(content);
+            }        
+
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
             element.setAttribute('download', filename);
 
