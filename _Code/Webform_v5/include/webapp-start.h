@@ -1,6 +1,5 @@
 const char webappStart[] = R"=====(
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,6 +28,13 @@ const char webappStart[] = R"=====(
             xmlhttp.send();
         }
 
+        function deleteSPIFFS() {
+            console.log("Löschen");
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "/delete", true);
+            xmlhttp.send();
+        }
+
         function createTextFile(jsonString) {
             console.log('TXT File');
             var link = document.createElement('a');
@@ -40,9 +46,17 @@ const char webappStart[] = R"=====(
             link.click();
         }
 
-        function downloadFile(content){
-            console.log(content);
-            
+        function downloadFile(filename, content) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
         }
     </script>
 </head>
@@ -68,5 +82,9 @@ const char webappStart[] = R"=====(
     </form>
 
     <button onclick="download(); window.location.reload();">Download link erstellen</button>
+   
+
+    <button onclick="deleteSPIFFS()">NEue Fragen löschen</button>
+
 
 )=====";
