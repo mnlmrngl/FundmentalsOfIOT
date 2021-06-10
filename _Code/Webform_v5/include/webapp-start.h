@@ -94,10 +94,9 @@ function formatContent(content) {
         <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
     </form>
 
-    <button onclick="download(); window.location.reload();">Download link erstellen</button>
+    <button onclick="download(); window.location.reload();">Downloadlink erstellen</button>
    
-
-    <button onclick="deleteSPIFFS()">NEue Fragen löschen</button>
+    <button onclick="deleteSPIFFS(); window.location.reload();">Eingereichte Fragen löschen</button>
 
 
 )=====";

@@ -34,17 +34,6 @@
             xmlhttp.send();
         }
 
-        function createTextFile(jsonString) {
-            console.log('TXT File');
-            var link = document.createElement('a');
-            link.download = 'data.json';
-            var blob = new Blob([jsonString], {
-                type: 'text/plain'
-            });
-            link.href = window.URL.createObjectURL(blob);
-            link.click();
-        }
-
         function formatContent(content) {
             content = content.replace('__F:', '\n\nF:');
             content = content.replace('__A:', '\nA:');
@@ -94,11 +83,11 @@
         <input type="button" onclick="validateForm()" name="submit" value="Abschicken">
     </form>
 
-    <button onclick="download(); window.location.reload();">Download link erstellen</button>
+    <button onclick="download(); window.location.reload();">Downloadlink erstellen</button>
     <button onclick="downloadFile('WanderschildFragen','__F: Ich heiße Klaus __A: Ä ä Ö ö Ü ü  __B:  __C:  __D: __F: Ich heiße Klaus __A: Ä ä Ö ö Ü ü  __B:  __C:  __D: ')">
-        Starte DOwnload </button>
+        Starte Download </button>
 
-    <button onclick="deleteSPIFFS()">NEue Fragen löschen</button>
+    <button onclick="deleteSPIFFS(); window.location.reload();">Erstellte Fragen Löschen</button>
 
 
 

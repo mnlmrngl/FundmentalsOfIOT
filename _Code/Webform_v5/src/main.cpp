@@ -137,7 +137,6 @@ void loop()
 
   if (client)
   {                                // If a new client connects,
-    Serial.println("New Client."); // print a message out in the serial port
     String currentLine = "";       // make a String to hold incoming data from the client
     while (client.connected())
     { // loop while the client's connected
@@ -185,12 +184,10 @@ void loop()
           }
           else if (header.indexOf("GET /delete") >= 0)
           {
-
             SPIFFS.remove("/newQuestions.txt");
           }
           if (download)
           {
-            Serial.println("TEEESCCHHHDDDDD");
             Serial.println(downloadContent);
 
             client.println("<button onclick=\"downloadFile('WanderschildFragen','" + downloadContent + "')\"> Starte DOwnload </button>");
