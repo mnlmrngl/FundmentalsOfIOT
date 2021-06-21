@@ -7,10 +7,14 @@
 		{
 			"name": "Webform_v5",
 			"path": "_Code\\Webform_v5"
+		},
+		{
+			"name": "Webform_v6",
+			"path": "..\\..\\..\\..\\..\\Documents\\PlatformIO\\Projects\\Webform_v6"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "Webform_v5",
+		"liveServer.settings.multiRootWorkspaceName": "Webform_v6",
 		"files.associations": {
 			"functional": "cpp",
 			"fstream": "cpp",
